@@ -16,7 +16,9 @@ const MovieSearchForm = ({ onSubmit }) => {
     return (
         <form onSubmit={handleSubmit}>
             <input type="text" value={inputValue} onChange={handleInputChange} />
-            <button type="submit">Search</button>
+            <button type="submit" disabled={!inputValue}>
+                Search
+            </button>
         </form>
     );
 };
