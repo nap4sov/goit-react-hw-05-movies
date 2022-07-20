@@ -22,4 +22,3 @@ export function App() {
     );
 }
 
-//  "homepage": "https://nap4sov.github.io/goit-react-hw-05-movies/",
