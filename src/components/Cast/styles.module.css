@@ -1,0 +1,11 @@
+.list {
+    padding: 20px 0px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    align-items: center;
+}
+
+.item {
+    text-align: center;
+}

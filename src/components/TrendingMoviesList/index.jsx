@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const TrendingMoviesList = ({ movies }) => {
     return movies.map(movie => {
@@ -8,6 +9,15 @@ const TrendingMoviesList = ({ movies }) => {
             </li>
         );
     });
+};
+
+TrendingMoviesList.propTypes = {
+    movies: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            title: PropTypes.string.isRequired,
+        }),
+    ),
 };
 
 export default TrendingMoviesList;

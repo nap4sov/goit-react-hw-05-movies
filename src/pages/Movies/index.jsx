@@ -1,20 +1,34 @@
 import { useState } from 'react';
 import MovieSearchForm from 'components/MovieSearchForm';
-import { Link, useSearchParams } from 'react-router-dom';
+import MoviesSearchList from 'components/MoviesSearchList';
+import { useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { fetchMoviesByTitle } from 'services/moviesApi';
+import ErrorMessage from './ErrorMessage';
 
 const Movies = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [movies, setMovies] = useState([]);
+    const [error, setError] = useState(null);
     const query = searchParams.get('query');
 
     useEffect(() => {
         if (!query) {
             return;
         }
-        fetchMoviesByTitle(query).then(setMovies);
-    }, [query]);
+        fetchMoviesByTitle(query)
+            .then(movies => {
+                if (movies.length === 0) {
+                    setSearchParams({});
+                    throw new Error("Your query doesn't match any results");
+                }
+                setMovies(movies);
+                setError('');
+            })
+            .catch(error => {
+                setError(error.message);
+            });
+    }, [query, setSearchParams]);
 
     const setQuery = formQuery => {
         setSearchParams(formQuery ? { query: formQuery } : {});
@@ -23,18 +37,7 @@ const Movies = () => {
     return (
         <>
             <MovieSearchForm onSubmit={setQuery} />
-            {movies && (
-                <ul>
-                    {movies.map(movie => {
-                        const path = `/movies/${movie.id}`;
-                        return (
-                            <li key={movie.id}>
-                                <Link to={path}>{movie.title}</Link>
-                            </li>
-                        );
-                    })}
-                </ul>
-            )}
+            {!error ? <MoviesSearchList movies={movies} /> : <ErrorMessage message={error} />}
         </>
     );
 };

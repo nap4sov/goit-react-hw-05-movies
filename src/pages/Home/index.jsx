@@ -6,7 +6,7 @@ const Home = () => {
     const [trendingMovies, setTrendingMovies] = useState(null);
 
     useEffect(() => {
-        fetchTrendingMovies().then(setTrendingMovies);
+        fetchTrendingMovies().then(setTrendingMovies).catch(console.log);
     }, []);
 
     return (

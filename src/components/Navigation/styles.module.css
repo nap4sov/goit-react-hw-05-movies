@@ -1,19 +1,25 @@
 .navigation {
     display: flex;
     align-items: center;
+    border-bottom: 2px solid #ececec;
+    margin-bottom: 10px;
 }
 
 .link {
     text-decoration: none;
     padding-top: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
     color: black;
     font-size: 20px;
 }
 .link:hover,
-.link:focus,
-.link.active {
+.link:focus {
     color: blueviolet;
+}
+
+.activeLink {
+    color: blueviolet;
+    font-weight: 700;
 }
 
 .link:not(:last-child) {

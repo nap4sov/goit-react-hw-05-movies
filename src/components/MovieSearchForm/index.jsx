@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import styles from './styles.module.css';
+import PropTypes from 'prop-types';
 
 const MovieSearchForm = ({ onSubmit }) => {
     const [inputValue, setInputValue] = useState('');
@@ -14,13 +16,22 @@ const MovieSearchForm = ({ onSubmit }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input type="text" value={inputValue} onChange={handleInputChange} />
-            <button type="submit" disabled={!inputValue}>
+        <form onSubmit={handleSubmit} className={styles.form}>
+            <input
+                type="text"
+                value={inputValue}
+                onChange={handleInputChange}
+                className={styles.input}
+            />
+            <button type="submit" disabled={!inputValue} className={styles.button}>
                 Search
             </button>
         </form>
     );
+};
+
+MovieSearchForm.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
 };
 
 export default MovieSearchForm;

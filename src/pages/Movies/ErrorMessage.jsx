@@ -1,11 +1,12 @@
+import styles from './styles.module.css';
 import PropTypes from 'prop-types';
 
 const ErrorMessage = ({ message }) => {
-    return <p>{message}</p>;
+    return <p className={styles.message}>{message}</p>;
 };
 
 ErrorMessage.propTypes = {
-    message: PropTypes.string.isRequired,
+    movies: PropTypes.string.isRequired,
 };
 
 export default ErrorMessage;
