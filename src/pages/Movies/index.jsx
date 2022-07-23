@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import MovieSearchForm from 'components/MovieSearchForm';
-import MoviesSearchList from 'components/MoviesSearchList';
 import { useSearchParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { fetchMoviesByTitle } from 'services/moviesApi';
 import ErrorMessage from './ErrorMessage';
+
+const MovieSearchForm = lazy(() => import('../../components/MovieSearchForm'));
+const MoviesSearchList = lazy(() => import('../../components/MoviesSearchList'));
 
 const Movies = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -35,10 +36,10 @@ const Movies = () => {
     };
 
     return (
-        <>
+        <Suspense fallback="Loading...">
             <MovieSearchForm onSubmit={setQuery} />
             {!error ? <MoviesSearchList movies={movies} /> : <ErrorMessage message={error} />}
-        </>
+        </Suspense>
     );
 };
 
