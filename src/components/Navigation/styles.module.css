@@ -25,3 +25,10 @@
 .link:not(:last-child) {
     margin-right: 20px;
 }
+
+.button {
+    display: block;
+    min-width: 80px;
+    margin-bottom: 10px;
+    padding: 5px;
+}

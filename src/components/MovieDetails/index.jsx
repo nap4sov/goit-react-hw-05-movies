@@ -1,5 +1,5 @@
 import { useState, useEffect, Suspense } from 'react';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useParams, useLocation } from 'react-router-dom';
 import { fetchMovieDetails, POSTER_BASE_URL, BACKGROUND_BASE_URL } from 'services/moviesApi';
 import styles from './styles.module.css';
 
@@ -9,6 +9,7 @@ const MovieDetails = () => {
         setMovie,
     ] = useState({});
     const { movieId } = useParams();
+    const location = useLocation();
 
     useEffect(() => {
         fetchMovieDetails(movieId).then(setMovie).catch(console.log);
@@ -42,10 +43,20 @@ const MovieDetails = () => {
                     <p>Additional information</p>
                     <ul className={styles.additionalLinks}>
                         <li>
-                            <Link to="cast">Cast</Link>
+                            <Link
+                                to="cast"
+                                state={{ from: location.state ? location.state.from : '/' }}
+                            >
+                                Cast
+                            </Link>
                         </li>
                         <li>
-                            <Link to="reviews">Reviews</Link>
+                            <Link
+                                to="reviews"
+                                state={{ from: location.state ? location.state.from : '/' }}
+                            >
+                                Reviews
+                            </Link>
                         </li>
                     </ul>
                 </div>

@@ -37,7 +37,7 @@ const Movies = () => {
 
     return (
         <Suspense fallback="Loading...">
-            <MovieSearchForm onSubmit={setQuery} />
+            <MovieSearchForm onSubmit={setQuery} query={query} />
             {!error ? <MoviesSearchList movies={movies} /> : <ErrorMessage message={error} />}
         </Suspense>
     );

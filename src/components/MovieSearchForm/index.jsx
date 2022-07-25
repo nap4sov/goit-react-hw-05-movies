@@ -1,9 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './styles.module.css';
 import PropTypes from 'prop-types';
 
-const MovieSearchForm = ({ onSubmit }) => {
+const MovieSearchForm = ({ onSubmit, query }) => {
     const [inputValue, setInputValue] = useState('');
+
+    useEffect(() => {
+        setInputValue(query ?? '');
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const handleInputChange = event => {
         setInputValue(event.target.value);
